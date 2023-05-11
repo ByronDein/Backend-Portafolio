@@ -1,6 +1,9 @@
-import express from 'express';
-const app = express();
+const http = require("http");
+const app = require("./app");
 
-app.listen(3000, () => {
-  console.log('La aplicación está corriendo en el puerto 3000!');
+const port = 3000;
+const server = http.createServer(app);
+
+server.listen(port, () => {
+    console.log(`server running in port ${port}`);
 });

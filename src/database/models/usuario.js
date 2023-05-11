@@ -1,6 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/sequelize';
-import { Ticket } from './ticket';
+const { DataTypes }= require ('sequelize');
+const {sequelize} = require('../config/sequelize');
+const Ticket = require('./ticket');
 
 const Usuario = sequelize.define('usuario', {
   id_usuario: {
@@ -34,3 +34,5 @@ Usuario.hasMany(Ticket, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
+
+module.exports = Usuario;

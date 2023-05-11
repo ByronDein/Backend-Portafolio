@@ -1,35 +1,15 @@
-
-const mongoose = require('mongoose');
-// Reemplaza estos valores con los tuyos
-const URI = "mongodb://GymDesarrollo:Gym.Desarrollo.Ivaras@127.0.0.1:27017/?";
-const dbName = 'pruebaDesarrollo';
-const collectionName = 'alumnos';
-const fieldName = 'correo';
-
-mongoose.connect(URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: dbName,
-})
-
-const connection = mongoose.connection;
-
-connection.on('error', err => console.log(err));
-connection.once('open', async () => {
-    console.log('DB is connected');
-
-    const collection = connection.collection(collectionName);
-    const cursor = collection.find();
-
-    for await (const doc of cursor) {
-        await collection.updateOne(
-            { _id: doc._id },
-            { $set: { [fieldName]: doc[fieldName].toLowerCase() } }
-        );
+require("dotenv").config();
+const sequelize = require("sequelize");
+const db = new sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+        dialect: "mysql",
+        host: process.env.DB_HOST,
     }
-});
-
-
+);
+module.exports = db;
 // const URI = "mongodb://GymDesarrollo:Gym.Desarrollo.Ivaras@127.0.0.1:27017/?";
 
 // mongoose.connect(URI, {
