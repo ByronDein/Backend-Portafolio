@@ -1,12 +1,12 @@
 require("dotenv").config();
 const sequelize = require("sequelize");
 const db = new sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+   "reciclajedb",
+    "root",
+    "XD.byron123",
     {
         dialect: "mysql",
-        host: process.env.DB_HOST,
+        host: process.env.DB_HOST || "localhost", 
     }
 );
 module.exports = db;

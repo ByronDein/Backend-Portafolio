@@ -31,4 +31,5 @@ TicketEstado.belongsTo(Ticket, {
   onUpdate: 'CASCADE',
 });
 
-export { TicketEstado };
+
+module.exports = TicketEstado;

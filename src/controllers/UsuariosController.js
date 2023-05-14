@@ -1,11 +1,11 @@
-const model = require("../database/models/usuario");
+const Usuario = require("../database/models/usuario");
 const { Op } = require("sequelize");
 const controller = {};
 
 
 controller.getAll = async function (req, res) {
     try {
-        const userData = await model.user.findAll();
+        const userData = await Usuario.findAll();
         if (userData.length > 0) {
              res
                 .status(200)
@@ -20,7 +20,7 @@ controller.getAll = async function (req, res) {
 
 controller.getUsername = async function (req, res) {
     try {
-        let userData = await model.user.findAll({
+        let userData = await Usuario.findAll({
         where: { username: { [Op.like]: `%${req.params.username}%` } },
         });
         if (userData.length > 0) {
@@ -36,49 +36,42 @@ controller.getUsername = async function (req, res) {
 };
 
 
+
+
 controller.createNew = async function (req, res) {
-    try {
-        //   check data has already been created
-        const checkData = await model.user.findAll({
-        where: {
-            [Op.or]: {
-                username: req.body.username,
-                password: req.body.password,
-                },
-            },
-        });
-    if (checkData.length > 0) {
-        res.status(500).json({ message: "username/password has already in use" });
-    } else {
-        await model.user
-            .create({
-            username: req.body.username,
-            password: req.body.password,
-            token: req.body.username + req.body.password,
-        })
-        .then((result) => {
-            res.status(201).json({
-            message: "user successful created",data: {
-            username: req.body.username,
-            password: req.body.password,
-            token: req.body.username + req.body.password,
-                },
-            });
-        });
-    }
-    } catch (error) {
-        res.status(404).json({ message: error });
-    }
+  try {
+    const { id_usuario, nombre, contrasenia, correo, foto } = req.body;
+    const token = id_usuario + contrasenia; // Generar el token aquí
+    const newUser = await Usuario.create({
+      id_usuario,
+      nombre,
+      contrasenia,
+      correo,
+      foto,
+    });
+
+    res.status(201).json({
+      message: 'user successful created',
+      data: {
+        id_usuario: newUser.id_usuario,
+        nombre: newUser.nombre,
+        correo: newUser.correo,
+        foto: newUser.foto,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating user', error });
+  }
 };
 
 
 controller.editAt = async function (req, res) {
     try {
-        await model.user
+        await Usuario
             .findAll({ where: { id: req.body.id } })
             .then(async (result) => {
                 if (result.length > 0) {
-                    await model.user.update(
+                    await Usuario.update(
                        {
                            username: req.body.username,
                            password: req.body.password,
@@ -107,11 +100,11 @@ controller.editAt = async function (req, res) {
 
 controller.deleteUser = async function (req, res) {
     try {
-        await model.user
+        await Usuario
             .findAll({ where: { id: req.body.id } })
             .then(async (result) => {
         if (result.length > 0) {
-            await model.user.destroy({ where: { id: req.body.id } });
+            await Usuario.destroy({ where: { id: req.body.id } });
             res.status(200).json({ message: "delete user successfully" });
         } else {
             res.status(404).json({ message: "id user not found" });

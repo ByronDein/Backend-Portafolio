@@ -26,14 +26,17 @@ const Ticket = sequelize.define('ticket', {
   },
 });
 
-Ticket.Usuario= Ticket.belongsTo(Usuario,  { foreignKey: 'usuario_id_usuario' });
+// Ticket.Usuario= Ticket.belongsTo(Usuario,  { foreignKey: 'id_usuario' });
 
 // Ticket.belongsTo(Usuario, {
 //   foreignKey: {
-//     name: 'usuario_id_usuario',
+//     name: 'id_usuario',
 //     allowNull: false,
 //   },
 //   onDelete: 'CASCADE',
 //   onUpdate: 'CASCADE',
 // }
 // );
+
+
+module.exports = Ticket;

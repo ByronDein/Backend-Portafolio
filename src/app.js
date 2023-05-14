@@ -1,11 +1,31 @@
 // import module/package
-const usuario = require("./routes/usuarios");
+const usuarios = require("./routes/usuarios");
 const express = require("express");
+const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const app = express();
+const db = require("./database");
+// setting port
+app.set("port", process.env.PORT || 3000);
+// setting database
+(async () => {
+    try {
+        await db.sync();
+        console.log("database sync");
+        await db.authenticate()
+            .then(() => console.log("database connected", ))
+            .catch((err) => console.log(err));
+    } catch (error) {
+        console.log(error);
+    }
+})();
+    
+
 // setting middleware
-app.use( usuario);
+app.use(cors());
+app.use(express.json());
+app.use("/usuarios",usuarios);
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

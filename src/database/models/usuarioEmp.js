@@ -46,3 +46,7 @@ UsuarioEmp.hasMany(TicketEstado, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
+
+
+
+module.exports = UsuarioEmp;
