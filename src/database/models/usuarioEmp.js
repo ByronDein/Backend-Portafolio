@@ -1,7 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/sequelize';
-import { TicketEstado } from './ticket_estado';
-
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/sequelize');
+const { TicketEstado } = require('./ticketEstado');
 const UsuarioEmp = sequelize.define('usuario_emp', {
   id_usuario_emp: {
     type: DataTypes.STRING(100),

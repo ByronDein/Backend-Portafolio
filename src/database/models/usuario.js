@@ -27,6 +27,10 @@ const Usuario = sequelize.define('Usuario', {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
+  direccion: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
   created_at: DataTypes.DATE,
   updated_at: DataTypes.DATE
 }, {

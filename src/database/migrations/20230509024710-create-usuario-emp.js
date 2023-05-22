@@ -22,7 +22,18 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: false,
       },
-      
+      direccion: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      transporte: {
+        type: Sequelize.BOOLEAN(1),
+        allowNull: false,
+      },
+      obj_reciclaje: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

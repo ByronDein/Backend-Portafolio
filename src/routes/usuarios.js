@@ -3,15 +3,17 @@ const router = Router();
 
 
 
-const { getAll, getUsername, createNew, editAt, deleteUser } = require('../controllers/UsuariosController');
+const { getAll,  createNew, editAt, deleteUser, getTicketsByUser } = require('../controllers/UsuariosController');
 
 router.route('/')
     .get(getAll)
-    // .get(getUsername)
     .post(createNew)
 
 router.route('/:id')
     .put(editAt)
     .delete(deleteUser)
+
+router.get('/usuarios/:id/tickets')
+    .get(getTicketsByUser)
 
 module.exports = router;

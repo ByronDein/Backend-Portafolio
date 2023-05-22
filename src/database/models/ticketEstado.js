@@ -1,6 +1,7 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/sequelize';
-import { Ticket } from './ticket';
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/sequelize');
+const { Ticket } = require('./ticket');
+const { UsuarioEmp } = require('./usuarioEmp');
 
 const TicketEstado = sequelize.define('ticket_estado', {
   id_ticket_estado: {
@@ -30,6 +31,16 @@ TicketEstado.belongsTo(Ticket, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 });
+
+TicketEstado.belongsTo(UsuarioEmp, {
+  foreignKey: {
+    name: 'usuario_emp_id_usuario_emp',
+    allowNull: false,
+  },
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+
 
 
 module.exports = TicketEstado;
