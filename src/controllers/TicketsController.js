@@ -2,16 +2,26 @@ const Ticket = require("../database/models/ticket");
 const { Op } = require("sequelize");
 const controller = {};    // Create a new ticket
 
+
+
+
+// const fs = require('fs');
+
+// const filePath = '/path/to/file.jpg';
+// const fileData = fs.readFileSync(filePath);
+
 controller.createTicket = async function (req, res) {
   try {
-    const { objeto, direccion, cantidad, dimensiones, empresa, usuario_id_usuario } = req.body;
+    const { objeto, direccion, cantidad, dimensiones, empresa, usuario_id_usuario, foto } = req.body;
+    console.log(req.body);
     const newTicket = await Ticket.create({
       objeto,
       direccion,
       cantidad,
       dimensiones,
       empresa,
-      usuario_id_usuario,
+      usuario_id_usuario: usuario_id_usuario,
+      foto,
     });
     res.status(201).json({
       message: "Ticket created successfully",
@@ -73,5 +83,16 @@ controller.deleteTicket = async function (req, res) {
     res.status(404).json({ message: error.message });
   }
 };
+
+
+controller.getTickets = async function (req, res) {
+  try {
+    const tickets = await Ticket.findAll();
+    res.status(200).json({ data: tickets });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 module.exports = controller;

@@ -3,7 +3,7 @@ const router = Router();
 
 
 
-const { getAll,  createNew, editAt, deleteUser, getTicketsByUser } = require('../controllers/UsuariosController');
+const { getAll,  createNew, editAt, deleteUser, getTicketsByUser, login } = require('../controllers/UsuariosController');
 
 router.route('/')
     .get(getAll)
@@ -12,8 +12,9 @@ router.route('/')
 router.route('/:id')
     .put(editAt)
     .delete(deleteUser)
-
-router.get('/usuarios/:id/tickets')
     .get(getTicketsByUser)
+router.route('/login')  
+    .post(login)
 
+    
 module.exports = router;

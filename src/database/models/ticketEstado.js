@@ -13,14 +13,23 @@ const TicketEstado = sequelize.define('ticket_estado', {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
-  descripcion: {
-    type: DataTypes.STRING(200),
+  comuna : {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
+  foto : {
+    type: DataTypes.BLOB,
     allowNull: false,
   },
   fecha: {
     type: DataTypes.DATEONLY,
     allowNull: false,
   },
+  direccion: {
+    type: DataTypes.STRING(100),
+    allowNull: false, 
+  },
+
 });
 
 TicketEstado.belongsTo(Ticket, {

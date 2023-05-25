@@ -25,9 +25,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      telefono : {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      comuna: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       direccion: {
         type: Sequelize.STRING,
-        allowNull: false  
+        allowNull: false,
+      },
+    
+      fecha_nacimiento: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,

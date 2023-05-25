@@ -2,12 +2,11 @@ const { DataTypes }= require ('sequelize');
 const {sequelize} = require('../config/sequelize');
 const Ticket = require('./ticket');
 
-const Usuario = sequelize.define('Usuario', {
-  id_usuario: {
-    type: DataTypes.STRING(100),
+const Usuario = sequelize.define('usuario', {
+  idUsuario: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
-    unique: true, // Aquí se agrega la restricción única
     autoIncrement: true,
   },
   nombre: {
@@ -24,13 +23,30 @@ const Usuario = sequelize.define('Usuario', {
     unique: true, // Aquí se agrega la restricción única
   },
   foto: {
+    type: DataTypes.STRING(200),
+    allowNull: false,
+  },
+
+  telefono : {
+    type: DataTypes.NUMBER(9),
+    allowNull: false,
+  },
+
+  comuna: {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
+
   direccion: {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
+
+  fechaNacimiento: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+
   created_at: DataTypes.DATE,
   updated_at: DataTypes.DATE
 }, {
@@ -39,8 +55,6 @@ const Usuario = sequelize.define('Usuario', {
   updatedAt: 'updated_at'
 }
 );
-
-module.exports = Usuario;
 
 
 Usuario.hasMany(Ticket, {
@@ -52,14 +66,6 @@ Usuario.hasMany(Ticket, {
   onUpdate: 'CASCADE',
 });
 
-Ticket.belongsTo(Usuario, {
-    foreignKey: {
-      name: 'id_usuario',
-      allowNull: false,
-    },
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  }
-  );
+
 
 module.exports = Usuario;

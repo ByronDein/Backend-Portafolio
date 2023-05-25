@@ -1,6 +1,6 @@
 // import module/package
 const usuarios = require("./routes/usuarios");
-const ticket = require("./routes/tickets");
+const tickets = require("./routes/tickets");
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -27,7 +27,7 @@ app.set("port", process.env.PORT || 3000);
 app.use(cors());
 app.use(express.json());
 app.use("/usuarios",usuarios);
-app.use("/tickets",ticket);
+app.use("/tickets",tickets);
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

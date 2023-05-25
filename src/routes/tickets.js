@@ -3,10 +3,11 @@ const router = Router();
 
 
 
-const {createTicket, updateTicket, deleteTicket  } = require('../controllers/TicketsController');
+const {createTicket, updateTicket, deleteTicket, getTickets  } = require('../controllers/TicketsController');
 
 router.route('/')
     .post(createTicket)
+    .get(getTickets)
 
 router.route('/:id')
     .put(updateTicket)
