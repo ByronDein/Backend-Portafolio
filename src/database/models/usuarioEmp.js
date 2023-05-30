@@ -24,11 +24,10 @@ const UsuarioEmp = sequelize.define('usuario_emp', {
     type: DataTypes.NUMBER(9),
     allowNull: false,
   },
-  
-  // comuna : {
-  //   type: DataTypes.STRING(100),
-  //   allowNull: false,
-  // },
+  comuna : {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
   direccion: {
     type: DataTypes.STRING(100),
     allowNull: false,
@@ -42,10 +41,10 @@ const UsuarioEmp = sequelize.define('usuario_emp', {
     allowNull: false,
   },
 
-  // foto: {
-  //   type: DataTypes.STRING(100),
-  //   allowNull: false,
-  // },
+  foto: {
+    type: DataTypes.STRING(100),
+    allowNull: true,
+  },
 });
 
 UsuarioEmp.hasMany(TicketEstado, {

@@ -29,7 +29,7 @@ const Ticket = sequelize.define('ticket', {
   },
   foto: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
   },
 
   empresa: {

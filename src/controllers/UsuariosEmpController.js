@@ -17,7 +17,7 @@ controller.getAll = async function (req, res) {
     }
 };
 
-controller.getTicketsByUser = async function (req, res) {
+controller.getTicketsByUserEmp = async function (req, res) {
     try {
         const usuarioIdUsuario = req.params.id;
         console.log(usuarioIdUsuario);
@@ -62,18 +62,20 @@ controller.login = async function (req, res) {
 
 controller.createNew = async function (req, res) {
     try {
-        const { idUsuario, nombre, contrasenia, correo, foto, direccion,  telefono, comuna, fechaNacimiento, } = req.body;
-        const token = idUsuario + contrasenia; // Generar el token aquí
+        const { idUsuarioEmp, nombreEmp, correo, contrasenia, telefono, comuna, direccion, transporte, objReciclaje, foto, } = req.body;
+        console.log(req.body);
+        const token = idUsuarioEmp + contrasenia; // Generar el token aquí
         const newUser = await Usuario.create({
-            idUsuario,
-            nombre,
-            contrasenia,
-            correo,
-            foto,
-            direccion,
+            idUsuarioEmp, 
+            nombreEmp, 
+            correo, 
+            contrasenia, 
             telefono,
-            comuna,
-            fechaNacimiento,
+             comuna, 
+             direccion, 
+             transporte, 
+             objReciclaje, 
+             foto,
             token,
         });
 
