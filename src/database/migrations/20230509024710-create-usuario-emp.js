@@ -22,6 +22,14 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: false,
       },
+      telefono: {
+        type: Sequelize.NUMBER(9),
+        allowNull: false,
+      },
+      comuna: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
       direccion: {
         type: Sequelize.STRING(100),
         allowNull: false,
@@ -31,10 +39,6 @@ module.exports = {
         allowNull: false,
       },
       obj_reciclaje: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-      },
-      foto: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },

@@ -6,8 +6,9 @@ const UsuarioEmp = sequelize.define('usuario_emp', {
     type: DataTypes.STRING(100),
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true,
   },
-  nombreEmp: {
+  nombre: {
     type: DataTypes.STRING(50),
     allowNull: false,
   },
@@ -47,14 +48,7 @@ const UsuarioEmp = sequelize.define('usuario_emp', {
   },
 });
 
-UsuarioEmp.hasMany(TicketEstado, {
-  foreignKey: {
-    name: 'usuario_emp_id_usuario_emp',
-    allowNull: false,
-  },
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
+
 
 
 

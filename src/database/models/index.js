@@ -37,6 +37,8 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+require ('../associations')(db);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

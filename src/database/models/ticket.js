@@ -49,7 +49,7 @@ usuarioIdUsuario: {
 
 
 
-// Ticket.belongsTo(Usuario,  { foreignKey: 'usuario_id_usuario' });
+
 
 // Ticket.belongsTo(Usuario, {
 //   foreignKey: {

@@ -20,7 +20,7 @@ controller.createTicket = async function (req, res) {
       cantidad,
       dimensiones,
       empresa,
-      usuario_id_usuario: usuario_id_usuario,
+      usuarioIdUsuario: usuario_id_usuario,
       foto,
     });
     res.status(201).json({

@@ -32,23 +32,7 @@ const TicketEstado = sequelize.define('ticket_estado', {
 
 });
 
-TicketEstado.belongsTo(Ticket, {
-  foreignKey: {
-    name: 'ticket_id_ticket',
-    allowNull: false,
-  },
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
 
-TicketEstado.belongsTo(UsuarioEmp, {
-  foreignKey: {
-    name: 'usuario_emp_id_usuario_emp',
-    allowNull: false,
-  },
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
 
 
 

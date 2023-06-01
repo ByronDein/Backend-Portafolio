@@ -57,14 +57,6 @@ const Usuario = sequelize.define('usuario', {
 );
 
 
-Usuario.hasMany(Ticket, {
-  foreignKey: {
-    name: 'usuario_id_usuario',
-    allowNull: false,
-  },
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
 
 
 
