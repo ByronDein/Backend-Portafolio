@@ -10,7 +10,7 @@ controller.getAll = async function (req, res) {
         if (userData.length > 0) {
             res.status(200).json({ message: "Connection successful", data: userData });
         } else {
-            res.status(200).json({ message: "Connection failed", data: [] });
+            res.status(200).json({ message: "no user found", data: [] });
         }
     } catch (error) {
         res.status(404).json({ message: error });
@@ -39,20 +39,26 @@ controller.getTicketsByUserEmp = async function (req, res) {
 controller.login = async function (req, res) {
     try {
         const { correo, contrasenia } = req.body;
-        console.log(req.body);
-        const user = await UsuarioEmp.findOne({ where: { correo, contrasenia } });
-        console.log(user);
-        if (user) {
-            res.status(200).json({
-                message: 'Login successful',
-                data: {
-                    idUsuarioEmp: user.idUsuarioEmp,
-                    nombreEmpresa: user.nombreEmpresa,
-                    correo: user.correo,
-                },
-            });
-        } else {
-            res.status(200).json({ message: 'Login failed', data: {} });
+        if (!correo || !contrasenia) {
+            res.status(400).json({ message: 'Bad request, all fields are required', data: {} });
+            return;
+        }
+        else {
+            const user = await UsuarioEmp.findOne({ where: { correo, contrasenia } });
+            console.log(user);
+            if (user) {
+                res.status(200).json({
+                    message: 'Login successful',
+                    data: {
+                        idUsuarioEmp: user.idUsuarioEmp,
+                        nombreEmpresa: user.nombreEmpresa,
+                        correo: user.correo,
+                    },
+                });
+            }
+            else {
+                res.status(200).json({ message: 'Login failed', data: {} });
+            }
         }
     } catch (error) {
         res.status(500).json({ message: 'Error login', error });
@@ -63,46 +69,55 @@ controller.login = async function (req, res) {
 controller.createNew = async function (req, res) {
     try {
         const { idUsuarioEmp, nombre, correo, contrasenia, telefono, comuna, direccion, transporte, objReciclaje, foto, } = req.body;
-        console.log(req.body);
-        const token = idUsuarioEmp + contrasenia; // Generar el token aquí
-        const newUser = await UsuarioEmp.create({
-            idUsuarioEmp,
-            nombre,
-            correo,
-            contrasenia,
-            telefono,
-            comuna,
-            direccion,
-            transporte,
-            objReciclaje,
-            foto,
-            token,
-        });
+        if (!nombre || !correo || !contrasenia || !telefono || !comuna || !direccion || !transporte || !objReciclaje) {
+            res.status(400).json({ message: 'Bad request, all fields are required', data: {} });
+            return;
+        }
+        else {
+            const token = idUsuarioEmp + contrasenia; // Generar el token aquí
+            const newUser = await UsuarioEmp.create({
+                idUsuarioEmp,
+                nombre,
+                correo,
+                contrasenia,
+                telefono,
+                comuna,
+                direccion,
+                transporte,
+                objReciclaje,
+                foto,
+                token,
+            });
 
-        res.status(201).json({
-            message: 'user successful created',
-            data: {
-                idUsuarioEmp: newUser.idUsuarioEmp,
-                nombre: newUser.nombre,
-                correo: newUser.correo,
-                foto: newUser.foto,
-                direccion: newUser.direccion,
-                token: newUser.token,
-            },
-        });
-    } catch (error) {
+            res.status(201).json({
+                message: 'user successful created',
+                data: {
+                    idUsuarioEmp: newUser.idUsuarioEmp,
+                    nombre: newUser.nombre,
+                    correo: newUser.correo,
+                    foto: newUser.foto,
+                    direccion: newUser.direccion,
+                    token: newUser.token,
+                },
+            });
+        }
+    }
+    catch (error) {
         res.status(500).json({ message: 'Error creating user', error });
     }
 };
 
 controller.editAt = async function (req, res) {
     try {
-        const { nombreEmpresa, contrasenia, correo, foto, direccion } = req.body;
-        const idUsuarioEmp = req.params.id;
+        const { nombre, correo, contrasenia, telefono, comuna, direccion, transporte, objReciclaje, foto, } = req.body;
+        
+
         console.log(req.body);
+        const idUsuarioEmp = req.params.id;
+        console.log(req.params.id);
         const token = idUsuarioEmp + contrasenia; // Generar el token aquí
         const result = await UsuarioEmp.update(
-            { nombreEmpresa, contrasenia, correo, foto, direccion, token },
+            { nombre, correo, contrasenia, telefono, comuna, direccion, transporte, objReciclaje, foto, token },
             { where: { idUsuarioEmp } }
         );
         if (result[0] === 0) {
@@ -110,7 +125,7 @@ controller.editAt = async function (req, res) {
         } else {
             res.status(200).json({
                 message: "update successful",
-                data: { idUsuarioEmp, nombreEmpresa, contrasenia, correo, foto, direccion, token },
+                data: { idUsuarioEmp, nombre, correo, contrasenia, telefono, comuna, direccion, transporte, objReciclaje, foto, token },
             });
         }
     } catch (error) {

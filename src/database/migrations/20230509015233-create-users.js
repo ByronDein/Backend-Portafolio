@@ -19,7 +19,8 @@ module.exports = {
       },
       correo: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique : true
       },
       foto: {
         type: Sequelize.STRING,
