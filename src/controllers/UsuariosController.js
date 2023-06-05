@@ -17,6 +17,7 @@ controller.getAll = async function (req, res) {
     }
 };
 
+
 controller.getTicketsByUser = async function (req, res) {
     try {
         const usuarioIdUsuario = req.params.id;
@@ -48,11 +49,7 @@ controller.login = async function (req, res) {
             if (user) {
                 res.status(200).json({
                     message: 'Login successful',
-                    data: {
-                        id_usuario: user.id_usuario,
-                        nombre: user.nombre,
-                        correo: user.correo,
-                    },
+                    data: user
                 });
             } else {
                 res.status(200).json({ message: 'Login failed', data: {} });

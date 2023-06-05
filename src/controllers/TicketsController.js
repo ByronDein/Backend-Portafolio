@@ -13,27 +13,33 @@ const controller = {};    // Create a new ticket
 controller.createTicket = async function (req, res) {
   try {
     const { objeto, direccion, cantidad, dimensiones, empresa, usuario_id_usuario, foto } = req.body;
-    console.log(req.body);
-    const newTicket = await Ticket.create({
-      objeto,
-      direccion,
-      cantidad,
-      dimensiones,
-      empresa,
-      usuarioIdUsuario: usuario_id_usuario,
-      foto,
-    });
-    res.status(201).json({
-      message: "Ticket created successfully",
-      data: {
-        id_ticket: newTicket.id_ticket,
-        objeto: newTicket.objeto,
-        direccion: newTicket.direccion,
-        cantidad: newTicket.cantidad,
-        dimensiones: newTicket.dimensiones,
-        empresa: newTicket.empresa,
-      },
-    });
+    if (!objeto || !direccion || !cantidad || !dimensiones || !empresa || !usuario_id_usuario) {
+      res.status(400).json({ message: "Bad request, all fields are required" });
+      return;
+    }
+    else {
+      console.log(req.body);
+      const newTicket = await Ticket.create({
+        objeto,
+        direccion,
+        cantidad,
+        dimensiones,
+        empresa,
+        usuarioIdUsuario: usuario_id_usuario,
+        foto,
+      });
+      res.status(201).json({
+        message: "Ticket created successfully",
+        data: {
+          id_ticket: newTicket.id_ticket,
+          objeto: newTicket.objeto,
+          direccion: newTicket.direccion,
+          cantidad: newTicket.cantidad,
+          dimensiones: newTicket.dimensiones,
+          empresa: newTicket.empresa,
+        },
+      });
+    }
   } catch (error) {
     res.status(500).json({ message: "Error creating ticket", error });
   }
