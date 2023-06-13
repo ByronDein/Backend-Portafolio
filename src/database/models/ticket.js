@@ -31,7 +31,6 @@ const Ticket = sequelize.define('ticket', {
     type: DataTypes.STRING(100),
     allowNull: true,
   },
-
   empresa: {
     type: DataTypes.STRING(100),
     allowNull: false,

@@ -13,7 +13,7 @@ const controller = {};    // Create a new ticket
 controller.createTicket = async function (req, res) {
   try {
     const { objeto, direccion, cantidad, dimensiones, empresa, usuario_id_usuario, foto } = req.body;
-    if (!objeto || !direccion || !cantidad || !dimensiones || !empresa || !usuario_id_usuario) {
+    if (!objeto || !direccion || !cantidad || !dimensiones || !usuario_id_usuario) {
       res.status(400).json({ message: "Bad request, all fields are required" });
       return;
     }

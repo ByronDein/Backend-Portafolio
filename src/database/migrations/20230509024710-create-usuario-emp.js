@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
       },
       telefono: {
-        type: Sequelize.NUMBER(9),
+        type: Sequelize.INTEGER(9),
         allowNull: false,
       },
       comuna: {
