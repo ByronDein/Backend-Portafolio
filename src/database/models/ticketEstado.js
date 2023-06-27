@@ -8,6 +8,7 @@ const TicketEstado = sequelize.define('ticket_estado', {
     type: DataTypes.STRING(100),
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true,
   },
   estado: {
     type: DataTypes.STRING(20),
@@ -15,10 +16,6 @@ const TicketEstado = sequelize.define('ticket_estado', {
   },
   comuna : {
     type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  foto : {
-    type: DataTypes.BLOB,
     allowNull: false,
   },
   fecha: {
@@ -29,6 +26,23 @@ const TicketEstado = sequelize.define('ticket_estado', {
     type: DataTypes.STRING(100),
     allowNull: false, 
   },
+  ticketIdTicket :{
+    type: DataTypes.INTEGER,
+    field: 'ticket_id_ticket',
+    references: {
+      model: Ticket,
+      key: 'id_tickets'
+    }
+  },
+  usuarioEmpId :{
+    type: DataTypes.INTEGER,
+    field: 'usuario_emp_id', // Corrige el nombre de campo
+    references: {
+      model: UsuarioEmp,
+      key: 'idUsuarioEmp'
+    }
+  }
+
 
 });
 

@@ -3,11 +3,11 @@ const router = Router();
 
 
 
-const {createTicket, updateTicket, deleteTicket, getLastTicketCreated  } = require('../controllers/TicketsController');
+const {createTicketEstado,deleteTicket, getTickets, updateTicket } = require('../controllers/TicketEstadoController');
 
 router.route('/')
-    .post(createTicket)
-    .get(getLastTicketCreated)
+    .post(createTicketEstado)
+    .get(getTickets)
 
 router.route('/:id')
     .put(updateTicket)

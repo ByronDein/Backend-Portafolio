@@ -14,10 +14,12 @@ controller.createTicket = async function (req, res) {
   try {
     const { objeto, direccion, cantidad, dimensiones, empresa, usuario_id_usuario, foto } = req.body;
     if (!objeto || !direccion || !cantidad || !dimensiones || !usuario_id_usuario) {
+      console.log(req.body);
       res.status(400).json({ message: "Bad request, all fields are required" });
       return;
     }
     else {
+      const fotoBuffer = Buffer.from(foto, 'base64');
       console.log(req.body);
       const newTicket = await Ticket.create({
         objeto,
@@ -26,18 +28,19 @@ controller.createTicket = async function (req, res) {
         dimensiones,
         empresa,
         usuarioIdUsuario: usuario_id_usuario,
-        foto,
+        foto: fotoBuffer,
       });
       res.status(201).json({
         message: "Ticket created successfully",
         data: {
-          id_ticket: newTicket.id_ticket,
+          id_Ticket: newTicket.id_ticket,
           objeto: newTicket.objeto,
           direccion: newTicket.direccion,
           cantidad: newTicket.cantidad,
           dimensiones: newTicket.dimensiones,
           empresa: newTicket.empresa,
         },
+        return: newTicket.id_ticket
       });
     }
   } catch (error) {
@@ -45,7 +48,7 @@ controller.createTicket = async function (req, res) {
   }
 };
 
-module.exports = controller;
+
 
 controller.updateTicket = async function (req, res) {
   try {
@@ -91,14 +94,21 @@ controller.deleteTicket = async function (req, res) {
 };
 
 
-controller.getTickets = async function (req, res) {
+
+controller.getLastTicketCreated  = async function (req, res) {
   try {
-    const tickets = await Ticket.findAll();
-    res.status(200).json({ data: tickets });
+    const ticket = await Ticket.findOne({
+      order: [
+        ['id_tickets', 'DESC']
+      ]
+    });
+    res.status(200).json({ data: ticket });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 
 module.exports = controller;

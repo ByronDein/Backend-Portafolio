@@ -30,6 +30,16 @@ UsuarioEmp.hasMany(TicketEstado, {
 });
 
 
+Ticket.hasMany(TicketEstado, {
+    foreignKey: {
+        name: 'ticket_id_ticket',
+        allowNull: false,
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
+
 TicketEstado.belongsTo(Ticket, {
     foreignKey: {
         name: 'ticket_id_ticket',

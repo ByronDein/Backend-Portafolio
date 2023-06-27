@@ -49,11 +49,7 @@ controller.login = async function (req, res) {
             if (user) {
                 res.status(200).json({
                     message: 'Login successful',
-                    data: {
-                        idUsuarioEmp: user.idUsuarioEmp,
-                        nombreEmpresa: user.nombreEmpresa,
-                        correo: user.correo,
-                    },
+                    data: user,
                 });
             }
             else {

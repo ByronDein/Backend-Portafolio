@@ -26,7 +26,7 @@ module.exports = {
           allowNull: false,
         },
       foto: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.BLOB("long"),
         allowNull: true,
       },
       empresa: {

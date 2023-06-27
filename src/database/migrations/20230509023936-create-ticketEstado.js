@@ -13,8 +13,12 @@ module.exports = {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
-      descripcion: {
+      direccion: {
         type: Sequelize.STRING(200),
+        allowNull: false,
+      },
+      comuna: {
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       fecha: {
@@ -27,6 +31,16 @@ module.exports = {
         references: {
           model: 'tickets',
           key: 'id_tickets',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      usuario_emp_id_usuario_emp: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'usuario_emps',
+          key: 'id_usuario_emp',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',

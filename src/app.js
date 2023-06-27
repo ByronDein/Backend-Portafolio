@@ -2,6 +2,7 @@
 const usuarios = require("./routes/usuarios");
 const usuariosEmp = require("./routes/usuariosEmp");
 const tickets = require("./routes/tickets");
+const ticketsEstado = require("./routes/ticketEstado");
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -27,10 +28,15 @@ app.set("port", process.env.PORT || 3000);
 // setting middleware
 app.use(cors());
 app.use(express.json());
+// setting middleware
+app.use(cors({
+    origin: 'http://localhost:8100'
+  }));
 
 app.use("/usuarios",usuarios);
 app.use("/tickets",tickets);
 app.use("/usuariosEmp",usuariosEmp);
+app.use("/ticketsEst",ticketsEstado);
 
 
 
